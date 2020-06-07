@@ -30,10 +30,10 @@ namespace AnimalRx.Services.Controllers
         public IEnumerable<PatientVM> Get()
         {
             var patients = patientRepository.GetPatients();
-            List<PatientVM> patientsToBeReturned = new List<PatientVM>();
+            List<PatientVM> patientVMs = new List<PatientVM>();
             foreach (var patient in patients)
             {
-                var patientToBeReturned = new PatientVM() {
+                var patientVM = new PatientVM() {
                     PatientId = patient.PatientId,
                     Name = patient.Name,
                     DateAdmitted = patient.DateAdmitted,
@@ -80,11 +80,11 @@ namespace AnimalRx.Services.Controllers
                     vaccinesToBeReturned.Add(vaccineVM);
                 }
 
-                patientToBeReturned.Treatments = treatmentsToBeReturned;
-                patientToBeReturned.Vaccines = vaccinesToBeReturned;
-                patientsToBeReturned.Add(patientToBeReturned);
+                patientVM.Treatments = treatmentsToBeReturned;
+                patientVM.Vaccines = vaccinesToBeReturned;
+                patientVMs.Add(patientVM);
             }
-            return patientsToBeReturned;
+            return patientVMs;
         }
 
         // /api/patients
